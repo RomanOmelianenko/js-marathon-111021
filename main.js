@@ -27,13 +27,12 @@ function createPlayer(player, obj) {
   const $life = document.createElement("div");
   const $name = document.createElement("div");
   const $img = document.createElement("img");
-  const $arenas = document.querySelector(".arenas");
 
   $player1.classList.add(player);
   $progressbar.classList.add("progressbar");
   $character.classList.add("character");
   $life.classList.add("life");
-  $life.style.width = obj.hp + "px";
+  $life.style.width = obj.hp + "%";
   $name.classList.add("name");
   $name.innerText = obj.name;
   $img.src = obj.img;
@@ -45,6 +44,8 @@ function createPlayer(player, obj) {
   $progressbar.appendChild($name);
   $arenas.appendChild($player1);
 }
+
+const $arenas = document.querySelector(".arenas");
 
 // createPlayer("player1", "SUB-ZERO", 50);
 // createPlayer("player2", "Kitana", 80);
