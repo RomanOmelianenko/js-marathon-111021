@@ -54,8 +54,6 @@ function createPlayer(playerObj) {
   return $player1;
 }
 
-// function randomHp() {}
-
 function changeHp(player) {
   const $playerLife = document.querySelector(
     " .player" + player.player + " .life"
@@ -65,30 +63,36 @@ function changeHp(player) {
 
   player.hp -= randomHp;
 
-  // if (player1.hp === 0 && player2.hp === 0) {
-  //   console.log(player1.hp);
-  //   console.log(player2.hp);
-  //   console.log("DRAW");
-  //   $arenas.appendChild(playerDraw());
+  // if (player.hp <= 0) {
+  //   $arenas.appendChild(playerLose(player.name));
+  //   player.hp = 0;
+  //   randomHp = 0;
   //   $randomButton.style.display = "none";
   // }
 
-  if (player.hp <= 0) {
-    $arenas.appendChild(playerLose(player.name));
+  if (player1.hp > 0 && player2.hp < 0) {
+    $arenas.appendChild(playerWin(player1.name));
     player.hp = 0;
-    randomHp = 0;
+    $randomButton.style.display = "none";
+  } else if (player2.hp > 0 && player1.hp < 0) {
+    $arenas.appendChild(playerWin(player2.name));
+    player.hp = 0;
+    $randomButton.style.display = "none";
+  } else if (player1.hp === 0 && player2.hp === 0) {
+    $arenas.appendChild(playerDraw());
+    player.hp = 0;
     $randomButton.style.display = "none";
   }
 
   $playerLife.style.width = player.hp + "%";
 }
 
-function playerLose(name) {
-  const $loseTitle = createElement("div", "loseTitle");
-  $loseTitle.innerText = name + " lose";
+// function playerLose(name) {
+//   const $loseTitle = createElement("div", "loseTitle");
+//   $loseTitle.innerText = name + " lose";
 
-  return $loseTitle;
-}
+//   return $loseTitle;
+// }
 
 function playerDraw() {
   const $drawTitle = createElement("div", "drawTitle");
@@ -97,8 +101,14 @@ function playerDraw() {
   return $drawTitle;
 }
 
+function playerWin(name) {
+  const $winTitle = createElement("div", "winTitle");
+  $winTitle.innerText = name + " win";
+
+  return $winTitle;
+}
+
 $randomButton.addEventListener("click", function () {
-  // console.log("Click!!!");
   changeHp(player1);
   changeHp(player2);
 });
